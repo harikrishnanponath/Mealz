@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.harikrish.mealz.ui.theme.MealzTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MealzTheme {
-                MeelsCategoriesScreen(name = "Android")
+                MeelsCategoriesScreen()
             }
         }
     }
@@ -27,11 +28,12 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun MeelsCategoriesScreen(name: String, modifier: Modifier = Modifier) {
-    val viewModel = MealsCategoriesViewModel()
+fun MeelsCategoriesScreen() {
+    val viewModel: MealsCategoriesViewModel = viewModel()
+    val meals = viewModel.getMeals()
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Text(
-            text = "Hello $name!",
+            text = "Hello COMPOSE",
             modifier = Modifier.padding(innerPadding)
         )
     }
@@ -41,6 +43,6 @@ fun MeelsCategoriesScreen(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     MealzTheme {
-        MeelsCategoriesScreen("Android")
+        MeelsCategoriesScreen()
     }
 }
